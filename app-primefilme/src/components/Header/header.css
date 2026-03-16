@@ -1,40 +1,122 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ---- Reset ---- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-header{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    height: 60%;
-    background-color: #000000;
+/* ---- Header ---- */
+header {
+  width: 100%;
+  background: #0a0a0a;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+  font-family: 'DM Sans', sans-serif;
 }
 
-.logo{
-    text-decoration: none;
-    font-size: 30px;
-    padding: 0.5%;
-    cursor: pointer;
-    color: #fff;
-    font-weight: bold;
+/* Wrapper interno alinhado com o conteúdo das outras telas */
+.header-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.favoritos{
-    text-decoration: none;
-    cursor: pointer;
-    background-color: #fff;
-    padding: 5px 14px;
-    border-radius: 4px;
-    color: #000000;
+/* ---- Logo ---- */
+.logo {
+  text-decoration: none;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #f5f0e8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
 }
 
-.loading{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 12px;
+.logo:hover {
+  opacity: 0.8;
+}
+
+/* Ponto dourado decorativo ao lado do logo */
+.logo .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c8a96e;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+/* ---- Nav ---- */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---- Link favoritos (versão outline) ---- */
+.favoritos {
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 8px;
+  color: #f5f0e8;
+  border: 0.5px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.favoritos:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Variante preenchida (botão principal) */
+.favoritos.btn-primary {
+  background: #f5f0e8;
+  color: #0a0a0a;
+  border-color: transparent;
+}
+
+.favoritos.btn-primary:hover {
+  background: #e8e2d5;
+}
+
+/* ---- Loading ---- */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 0;
+  padding: 20px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Spinner animado no lugar do texto estático */
+.loading .spinner {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

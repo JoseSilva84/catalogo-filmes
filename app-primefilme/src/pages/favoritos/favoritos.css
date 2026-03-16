@@ -1,37 +1,110 @@
-.meus-filmes{
-    margin-top: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* ---- Container ---- */
+.meus-filmes {
+  max-width: 800px;
+  margin: 24px auto;
+  padding: 0 16px;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.meus-filmes h1{
-    margin-bottom: 14px;
+/* ---- Título ---- */
+.meus-filmes h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: #111;
+  margin: 0 0 6px;
+  align-self: flex-start;
 }
 
-.meus-filmes span{
-    font-size: 18px;
+/* ---- Subtítulo (contagem) ---- */
+.meus-filmes span {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 24px;
+  align-self: flex-start;
 }
 
-.meus-filmes ul{
-    width: 720px;
-}
-.meus-filmes ul li{
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 14px;
-}
-
-.meus-filmes div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ---- Lista ---- */
+.meus-filmes ul {
+  width: 100%;
+  max-width: 720px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.meus-filmes div a{
-    text-decoration: none;
-    color: blue;
-    margin-right: 14px;
+/* ---- Item da lista ---- */
+.meus-filmes ul li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: #ffffff;
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.meus-filmes ul li:hover {
+  border-color: rgba(0, 0, 0, 0.18);
+  transform: translateX(3px);
+}
+
+/* ---- Lado esquerdo: info do filme ---- */
+.meus-filmes .info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ---- Ações (direita do item) ---- */
+.meus-filmes div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---- Links/botões de ação ---- */
+.meus-filmes div a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  color: #111;
+  background: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.meus-filmes div a:hover {
+  background: #f5f5f5;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Botão remover (destrutivo) */
+.meus-filmes div .btn-remove {
+  border-color: transparent;
+  color: #999;
+  padding: 7px 10px;
+}
+
+.meus-filmes div .btn-remove:hover {
+  background: #fef2f2;
+  color: #b91c1c;
 }

@@ -1,57 +1,128 @@
-.filme-info{
-    margin: 0 auto;
-    margin-top: 18px;
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
-    padding: 0 8px;
+/* ---- Variáveis (mesmo padrão do lista-filmes) ---- */
+:root {
+  --film-radius: 16px;
+  --film-bg: #ffffff;
+  --film-border: rgba(0, 0, 0, 0.08);
+  --film-cta-bg: #0f0f0f;
+  --film-cta-color: #f5f0e8;
+  --film-transition: 0.2s ease;
 }
 
-.filme-info h1{
-    margin: 14px 0;
+/* ---- Container ---- */
+.filme-info {
+  max-width: 800px;
+  margin: 24px auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'DM Sans', sans-serif;
 }
 
-.filme-info img{
-    border-radius: 8px;
-    width: 900px;
-    max-width: 100%;
-    max-height: 340px;
-    object-fit: cover;
+/* ---- Imagem com wrapper para o overlay ---- */
+.filme-info .thumb-wrap {
+  position: relative;
+  border-radius: var(--film-radius);
+  overflow: hidden;
 }
 
-.filme-info h3{
-    margin: 14px;
+.filme-info img {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
 }
 
-.filme-info span{
-    margin: 8px 0;
+.filme-info .thumb-wrap:hover img {
+  transform: scale(1.025);
 }
 
-.area-button button{
-    margin-right: 12px;
-    margin-top: 14px;
-    margin-left: 0;
-    font-size: 20px;
-    border: 0;
-    outline: none;
-    padding: 12px;
-    border-radius: 4px;
-    cursor: pointer;
+/* ---- Título ---- */
+.filme-info h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  line-height: 1.25;
+  margin: 20px 0 8px;
+  color: #111;
 }
 
-.area-button button:hover{
-    background-color: bisque;
-    color: blue;
-    transition: all 0.5s ease;
+/* ---- Subtítulo / Direção ---- */
+.filme-info h3 {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0 0 16px;
 }
 
-.area-button a{
-    text-decoration: none;
-    color: black;
+/* ---- Tags / Badges de metadados ---- */
+.filme-info .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
-.area-button a:hover{
-    background-color: bisque;
-    color: blue;
-    transition: all 0.5s ease;
+.filme-info span {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #666;
+  border: 0.5px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+/* ---- Área de botões ---- */
+.area-button {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.area-button button,
+.area-button a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 22px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  background: transparent;
+  color: #111;
+  transition: background var(--film-transition),
+              color var(--film-transition),
+              border-color var(--film-transition);
+  outline: none;
+}
+
+/* Botão de ação principal (ex: Assistir) */
+.area-button .btn-primary {
+  background: var(--film-cta-bg);
+  color: var(--film-cta-color);
+  border-color: transparent;
+}
+
+.area-button .btn-primary:hover {
+  background: #2a2a2a;
+}
+
+/* Botões secundários */
+.area-button button:hover,
+.area-button a:hover {
+  background: #f5f5f5;
+  border-color: rgba(0, 0, 0, 0.2);
 }

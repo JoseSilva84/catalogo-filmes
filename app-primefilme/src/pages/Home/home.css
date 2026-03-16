@@ -1,40 +1,183 @@
-.lista-filmes{
-    max-width: 800px;
-    margin: 14px auto;
+/* ---- Fontes ---- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ---- Variáveis ---- */
+:root {
+  --film-radius: 16px;
+  --film-bg: #ffffff;
+  --film-border: rgba(0, 0, 0, 0.08);
+  --film-cta-bg: #0f0f0f;
+  --film-cta-color: #f5f0e8;
+  --film-transition: 0.25s ease;
 }
 
-.lista-filmes article{
-    width: 100%;
-    background-color: aliceblue;
-    padding: 15px;
-    border-radius: 4px;
+/* ---- Wrapper da home ---- */
+.home-wrapper {
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 0 24px;
+  font-family: 'DM Sans', sans-serif;
 }
 
-.lista-filmes strong{
-    margin-bottom: 14px;
-    text-align: center;
-    font-size: 22px;
-    display: block;
+/* ---- Cabeçalho do carrossel ---- */
+.carrossel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.lista-filmes img{
-    width: 900px;
-    max-width: 100%;
-    max-height: 340px;
-    object-fit: cover;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+.carrossel-titulo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: #111;
 }
 
-.lista-filmes a{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
-    font-size: 24px;
-    background-color: blue;
-    color: white;
-    text-decoration: none;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+/* ---- Botões de navegação ---- */
+.carrossel-controles {
+  display: flex;
+  gap: 8px;
+}
+
+.carrossel-controles button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--film-transition), border-color var(--film-transition);
+}
+
+.carrossel-controles button:hover {
+  background: #f5f5f5;
+  border-color: rgba(0, 0, 0, 0.22);
+}
+
+/* ---- Carrossel ---- */
+.lista-filmes {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 12px;
+  /* esconde a scrollbar mas mantém funcional */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.lista-filmes::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- Card ---- */
+.lista-filmes article {
+  flex: 0 0 220px;
+  scroll-snap-align: start;
+  background: var(--film-bg);
+  border: 0.5px solid var(--film-border);
+  border-radius: var(--film-radius);
+  overflow: hidden;
+  transition: transform var(--film-transition);
+}
+
+.lista-filmes article:hover {
+  transform: translateY(-4px);
+}
+
+/* ---- Imagem ---- */
+.lista-filmes .thumb-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.lista-filmes img {
+  width: 100%;
+  height: 310px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.lista-filmes article:hover img {
+  transform: scale(1.04);
+}
+
+/* ---- Corpo do card ---- */
+.lista-filmes .body {
+  padding: 14px 16px 4px;
+}
+
+.lista-filmes strong {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 1.35;
+  display: block;
+  color: #111;
+  /* limita a 2 linhas */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---- Botão CTA ---- */
+.lista-filmes a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 12px 16px 16px;
+  padding: 11px 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--film-cta-bg);
+  color: var(--film-cta-color);
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background var(--film-transition), letter-spacing var(--film-transition);
+}
+
+.lista-filmes a:hover {
+  background: #1e1e1e;
+  letter-spacing: 0.13em;
+}
+
+/* ---- Loading ---- */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 60px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #555;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

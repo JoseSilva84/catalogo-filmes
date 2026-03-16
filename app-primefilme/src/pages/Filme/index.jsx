@@ -25,54 +25,77 @@ const Filme = () => {
             })
             .catch(() => {
                 console.log("Filme não foi encontrado");
-                navigate("/", {replace: true});
-                return;
+                navigate("/", { replace: true });
             })
         }
-        
+
         loadFilme();
     }, [navigate, id]);
 
-    function salvarFilme(){
+    function salvarFilme() {
         const minhaLista = localStorage.getItem("@primefilmes");
         let filmeSalvo = JSON.parse(minhaLista) || [];
 
         const hasFilme = filmeSalvo.some((filmeItem) => filmeItem.id === filme.id);
 
-        if(hasFilme){
-            toast.warn("Esse filme já estar na lista");
+        if (hasFilme) {
+            toast.warn("Esse filme já está na lista");
             return;
         }
         filmeSalvo.push(filme);
         localStorage.setItem("@primefilmes", JSON.stringify(filmeSalvo));
-        toast.success("Filme foi salvo com sucesso!");
-    };
-
-    if(loading){
-        return (
-            <div className="filme-info">
-                <h1>Carregando detalhes do filme...</h1>
-            </div>
-        )
+        toast.success("Filme salvo com sucesso!");
     }
 
-    return ( 
+    if (loading) {
+        return (
+            <div className="loading">
+                <span className="spinner" />
+                Carregando detalhes...
+            </div>
+        );
+    }
+
+    return (
         <div className="filme-info">
+            <div className="thumb-wrap">
+                <img
+                    src={`https://image.tmdb.org/t/p/original${filme.backdrop_path}`}
+                    alt={filme.title}
+                />
+            </div>
+
             <h1>{filme.title}</h1>
-            <img src={`https://tmdb.org/t/p/original${filme.backdrop_path}`} alt={filme.title} />
-            
-            <h3>Sinopse</h3>
-            <span>{filme.overview}</span>
-            <strong>Nota: {filme.vote_average.toFixed(1)} /10</strong>
-            
+            <h3>Direção · {filme.release_date?.slice(0, 4)}</h3>
+
+            <div className="meta">
+                <span>{filme.vote_average?.toFixed(1)} ★</span>
+                <span>{filme.runtime} min</span>
+                {filme.genres?.slice(0, 2).map(g => (
+                    <span key={g.id}>{g.name}</span>
+                ))}
+            </div>
+
+            <div className="divider" />
+
+            <p className="sinopse">{filme.overview}</p>
+
+            <div className="divider" />
+
             <div className="area-button">
-                <button onClick={salvarFilme}>Salvar</button>
-                <button>
-                    <a target="_blank" rel="external" href={`https://youtube.com/results?search_query=${filme.title}Trailer`}>Trailer</a>
+                <button className="btn-primary" onClick={salvarFilme}>
+                    + Salvar
                 </button>
+                
+                <a target="_blank"
+                    rel="external noreferrer"
+                    href={`https://youtube.com/results?search_query=${filme.title} Trailer`}
+                >
+                    ▶ Trailer
+                </a>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default Filme;
