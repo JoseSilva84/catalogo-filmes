@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import api from '../../services/api';
 import { Link } from 'react-router-dom';
+import api from '../../services/api';
 import './home.css';
 
 // URL da AI: 'movie/now_playing?api_key=deac86272a92449f6c91e3fc36684014&language=pt-BR'
@@ -19,10 +19,10 @@ const Home = () => {
                 }
             })
             setFilmes(response.data.results.slice(0, 10));
+            setLoading(false);
         }
 
         loadFilmes();
-        setLoading(false);
     }, []);
 
     if (loading){
