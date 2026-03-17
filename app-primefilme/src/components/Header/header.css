@@ -1,19 +1,46 @@
-/* ---- Reset ---- */
+/* ========================================
+   RESET GLOBAL
+   ======================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ---- Header ---- */
-header {
-  width: 100%;
-  background: #0a0a0a;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
-  font-family: 'DM Sans', sans-serif;
+/* ========================================
+   VARIÁVEIS DE CORES E DESIGN
+   ======================================== */
+:root {
+  --color-bg-dark: #0a0a0a;
+  --color-text-light: #f5f0e8;
+  --color-text-dark: #0a0a0a;
+  --color-accent: #c8a96e;
+  --color-input-bg: #f5f0e8;
+  --color-input-bg-hover: #e8e2d5;
+  --color-border-light: rgba(255, 255, 255, 0.18);
+  --color-border-hover: rgba(255, 255, 255, 0.3);
+  --color-border-dark: rgba(255, 255, 255, 0.08);
+  --color-bg-hover: rgba(255, 255, 255, 0.07);
+  
+  --font-primary: 'DM Sans', sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  
+  --transition-smooth: 0.2s ease;
+  --radius-small: 5px;
+  --radius-medium: 8px;
 }
 
-/* Wrapper interno alinhado com o conteúdo das outras telas */
+/* ========================================
+   HEADER - ESTRUTURA PRINCIPAL
+   ======================================== */
+header {
+  width: 100%;
+  background: var(--color-bg-dark);
+  border-bottom: 0.5px solid var(--color-border-dark);
+  font-family: var(--font-primary);
+  z-index: 1000;
+}
+
 .header-inner {
   max-width: 800px;
   margin: 0 auto;
@@ -24,68 +51,96 @@ header {
   justify-content: space-between;
 }
 
-/* ---- Logo ---- */
+/* ========================================
+   LOGO
+   ======================================== */
 .logo {
   text-decoration: none;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display);
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.5px;
-  color: #f5f0e8;
+  color: var(--color-text-light);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: opacity var(--transition-smooth);
 }
 
 .logo:hover {
   opacity: 0.8;
 }
 
-/* Ponto dourado decorativo ao lado do logo */
 .logo .dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #c8a96e;
-  display: inline-block;
+  background: var(--color-accent);
   margin-bottom: 2px;
 }
 
-/* ---- Nav ---- */
+/* ========================================
+   NAVEGAÇÃO
+   ======================================== */
 nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+}
+
+/* ========================================
+   INPUTS - CAMPOS DE FORMULÁRIO
+   ======================================== */
+.input-search-wrapper {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.inputHeader{
+.input-header,
+.input-genre {
   text-align: center;
   height: 30px;
-  border-radius: 5px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  border: 0.5px solid rgba(255, 255, 255, 0.18);
-  background: #f5f0e8;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  padding: 6px 12px;
+  border-radius: var(--radius-small);
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 500;
+  border: 0.5px solid var(--color-border-light);
+  background: var(--color-input-bg);
+  color: var(--color-text-dark);
+  transition: background var(--transition-smooth), border-color var(--transition-smooth);
 }
 
-.inputHeader:focus {
+.input-header {
+  width: 120px;
+}
+
+.input-genre {
+  width: 120px;
+  margin: 0;
+}
+
+.input-header:focus,
+.input-genre:focus {
   outline: none;
-  background: #e8e2d5;
-  border-color: rgba(255, 255, 255, 0.3);
+  background: var(--color-input-bg-hover);
+  border-color: var(--color-border-hover);
 }
 
-.inputHeader::placeholder {
-  text-align: center;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  color: silver;
+.input-header::placeholder,
+.input-genre::placeholder {
+  color: rgba(128, 128, 128, 0.7);
+  font-size: 13px;
 }
 
-/* ---- Link favoritos (versão outline) ---- */
-.favoritos {
+/* ========================================
+   BOTÕES - LINKS E BUTTON
+   ======================================== */
+.btn-nav,
+.btn-search {
   text-decoration: none;
   cursor: pointer;
   font-size: 13px;
@@ -93,76 +148,48 @@ nav {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 8px 18px;
-  border-radius: 8px;
-  color: #f5f0e8;
-  border: 0.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-medium);
+  color: var(--color-text-light);
+  border: 0.5px solid var(--color-border-light);
   background: transparent;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  font-family: var(--font-primary);
+  transition: background var(--transition-smooth), border-color var(--transition-smooth), 
+              color var(--transition-smooth);
 }
 
-.favoritos:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.3);
+.btn-nav:hover,
+.btn-search:hover {
+  background: var(--color-bg-hover);
+  border-color: var(--color-border-hover);
 }
 
-/* Variante preenchida (botão principal) */
-.favoritos.btn-primary {
-  background: #f5f0e8;
-  color: #0a0a0a;
+/* Variante com fundo preenchido */
+.btn-nav.btn-primary {
+  background: var(--color-text-light);
+  color: var(--color-text-dark);
   border-color: transparent;
 }
 
-.favoritos.btn-primary:hover {
-  background: #e8e2d5;
+.btn-nav.btn-primary:hover {
+  background: var(--color-input-bg-hover);
 }
 
-.button-input{
-  text-decoration: none;
-  cursor: pointer;
-  margin: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 8px 18px;
-  border-radius: 8px;
-  color: #f5f0e8;
-  border: 0.5px solid rgba(255, 255, 255, 0.18);
-  background: transparent;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.button-input:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.button-input.btn-primary {
-  background: #f5f0e8;
-  color: #0a0a0a;
-  border-color: transparent;
-}
-
-.button-input.btn-primary:hover {
-  background: #e8e2d5;
-}
-
-/* ---- Loading ---- */
+/* ========================================
+   LOADING - SPINNER
+   ======================================== */
 .loading {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin-top: 0;
   padding: 20px 16px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-primary);
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.35);
 }
 
-/* Spinner animado no lugar do texto estático */
 .loading .spinner {
   width: 14px;
   height: 14px;
@@ -173,5 +200,7 @@ nav {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

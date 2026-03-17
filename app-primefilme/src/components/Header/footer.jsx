@@ -9,17 +9,16 @@ const Footer = () => {
           <Link className="logo" to="/">
             Prime Filme <span className="dot" />
           </Link>
-          {/* <p className="footer-tagline">Os melhores filmes, em um só lugar.</p> */}
+          <nav className="footer-nav">
+            <Link to="/">Início</Link>
+            <Link to="/favoritos">Meus Filmes</Link>
+            <p className="footer-copy">
+              © {new Date().getFullYear()} <a target='_blank' rel='external' href="https://portfolio-oficial-seven.vercel.app/">José Silva</a>. Todos os direitos reservados.
+            </p>
+          </nav>
         </div>
 
-        <nav className="footer-nav">
-          <Link to="/">Início</Link>
-          <Link to="/favoritos">Meus Filmes</Link>
-        </nav>
 
-        <p className="footer-copy">
-          © {new Date().getFullYear()} <a href="https://portfolio-oficial-seven.vercel.app/">José Silva</a>. Todos os direitos reservados.
-        </p>
       </div>
     </footer>
   );

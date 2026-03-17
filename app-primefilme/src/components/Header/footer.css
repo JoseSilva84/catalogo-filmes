@@ -6,12 +6,15 @@ footer {
   border-top: 0.5px solid rgba(255, 255, 255, 0.08);
   font-family: 'DM Sans', sans-serif;
   margin-top: auto;
+  position: static;
+  bottom: 0px;
+  z-index: 1000;
 }
 
 .footer-inner {
   max-width: 800px;
   margin: 0 auto;
-  padding: 32px 16px 28px;
+  padding: 15px 16px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;

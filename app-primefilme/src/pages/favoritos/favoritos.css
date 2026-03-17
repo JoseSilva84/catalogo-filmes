@@ -2,7 +2,7 @@
 .meus-filmes {
   max-width: 800px;
   margin: 24px auto;
-  padding: 0 16px;
+  padding: 0 16px 25%;
   font-family: 'DM Sans', sans-serif;
   display: flex;
   flex-direction: column;
@@ -13,6 +13,7 @@
 .meus-filmes h1 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 28px;
+  padding-left: 270px;
   font-weight: 700;
   letter-spacing: -0.4px;
   color: #111;
@@ -107,4 +108,9 @@
 .meus-filmes div .btn-remove:hover {
   background: #fef2f2;
   color: #b91c1c;
+}
+
+.semFilme{
+  padding-top: 20px;
+  padding-left: 230px;
 }
