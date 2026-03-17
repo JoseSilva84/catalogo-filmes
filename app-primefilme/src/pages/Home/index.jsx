@@ -1,11 +1,13 @@
-import { useEffect, useState, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FilmesContext } from '../../context/FilmesContext';
 import api from '../../services/api';
 import './home.css';
 
 const Home = () => {
-    const [filmes, setFilmes] = useState([]);
+    const [filmesPadrao, setFilmesPadrao] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { filmes: filmesPesquisa, ano } = useContext(FilmesContext);
     const carrosselRef = useRef(null);
 
     useEffect(() => {
@@ -17,7 +19,7 @@ const Home = () => {
                     page: 1
                 }
             });
-            setFilmes(response.data.results.slice(0, 20));
+            setFilmesPadrao(response.data.results.slice(0, 20));
             setLoading(false);
         }
         loadFilmes();
@@ -43,6 +45,37 @@ const Home = () => {
 
     return (
         <div className="home-wrapper">
+            {/* Seção de Resultados da Busca */}
+            {filmesPesquisa.length > 0 && (
+                <div style={{ marginBottom: '40px' }}>
+                    <div className="carrossel-header">
+                        <h2 className="carrossel-titulo">Resultados da Busca - {ano}</h2>
+                        <div className="carrossel-controles">
+                            <button onClick={() => scrollCarrossel('esquerda')} aria-label="Anterior">←</button>
+                            <button onClick={() => scrollCarrossel('direita')} aria-label="Próximo">→</button>
+                        </div>
+                    </div>
+
+                    <div className="lista-filmes" ref={carrosselRef}>
+                        {filmesPesquisa.map((filme) => (
+                            <article key={filme.id}>
+                                <div className="thumb-wrap">
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/w500${filme.poster_path}`}
+                                        alt={filme.title}
+                                    />
+                                </div>
+                                <div className="body">
+                                    <strong>{filme.title}</strong>
+                                </div>
+                                <Link to={`/filme/${filme.id}`}>Acessar →</Link>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Seção Original - Em Cartaz Agora */}
             <div className="carrossel-header">
                 <h2 className="carrossel-titulo">Em cartaz agora</h2>
                 <div className="carrossel-controles">
@@ -52,7 +85,7 @@ const Home = () => {
             </div>
 
             <div className="lista-filmes" ref={carrosselRef}>
-                {filmes.map((filme) => (
+                {filmesPadrao.map((filme) => (
                     <article key={filme.id}>
                         <div className="thumb-wrap">
                             <img

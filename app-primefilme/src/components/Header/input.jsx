@@ -1,48 +1,48 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import api from '../../services/api';
-import './header.css';
+import { useContext } from "react";
+import { toast } from "react-toastify";
+import { FilmesContext } from "../../context/FilmesContext";
+import api from "../../services/api";
+import "./header.css";
 
 const Input = () => {
-  const [nome, setNome] = useState('');
-  const [genero, setGenero] = useState('');
-  const [input, setInput] = useState('');
-  const { id } = useParams();
+  const { ano, setAno, genero, setGenero, setFilmes } = useContext(FilmesContext);
 
-  useEffect(() => {
-    async function loadFilme() {
-      try {
-        const response = await api.get(`/movie/${id}`, {
-          params: {
-            api_key: 'deac86272a92449f6c91e3fc36684014',
-            language: 'pt-BR',
-          },
-        });
-        setInput(response.data);
-      } catch (error) {
-        console.error('Filme não foi encontrado:', error);
-      }
+  async function pesquisaFilme() {
+    if (!ano) {
+      toast.error(`Digite um ano para a pesquisa!`);
+      return;
     }
-
-    loadFilme();
-  }, [id]);
-
-  const pesquisarFilme = () => {
-    if (nome.toLowerCase() === 'missão refúgio') {
-      toast.success("Você selecionou o filme 'Missão Refúgio'");
-    } else {
-      toast.error('O filme não está na lista');
+    try {
+      const response = await api.get("/discover/movie", {
+        params: {
+          api_key: "deac86272a92449f6c91e3fc36684014",
+          language: "pt-BR",
+          primary_release_year: ano,
+          with_genres: genero,
+        },
+      });
+      setFilmes(response.data.results);
+      toast.success(`Filmes do ano ${ano} encontrados com sucesso!`);
+    } catch (error) {
+      toast.error("Filme não foi encontrado:", error);
     }
-  };
+  }
+
+  //   const pesquisarFilme = () => {
+  //     if (ano === '2016') {
+  //       toast.success(`Você selecionou os filmes do ano ${ano}`);
+  //     } else {
+  //       toast.error(`Os filmes de ${ano} não estão na lista`);
+  //     }
+  //   };
 
   return (
     <div className="input-search-wrapper">
       <input
         type="text"
         placeholder="ano"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
+        value={ano}
+        onChange={(e) => setAno(e.target.value)}
         className="input-header"
       />
       <input
@@ -52,7 +52,7 @@ const Input = () => {
         onChange={(e) => setGenero(e.target.value)}
         className="input-genre"
       />
-      <button className="btn-search" onClick={pesquisarFilme}>
+      <button className="btn-search" onClick={pesquisaFilme}>
         Pesquisar
       </button>
     </div>
