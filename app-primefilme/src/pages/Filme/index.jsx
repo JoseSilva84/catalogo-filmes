@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import api from "../../services/api";
@@ -9,24 +9,34 @@ const Filme = () => {
     const { id } = useParams();
     const [filme, setFilme] = useState({});
     const [loading, setLoading] = useState(true);
+    const [streamings, setStreamings] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         async function loadFilme() {
-            await api.get(`/movie/${id}`, {
-                params: {
-                    api_key: 'deac86272a92449f6c91e3fc36684014',
-                    language: 'pt-BR',
-                }
-            })
-            .then((response) => {
-                setFilme(response.data);
+            try {
+                const [filmeRes, providersRes] = await Promise.all([
+                    api.get(`/movie/${id}`, {
+                        params: {
+                            api_key: 'deac86272a92449f6c91e3fc36684014',
+                            language: 'pt-BR',
+                        }
+                    }),
+                    api.get(`/movie/${id}/watch/providers`, {
+                        params: {
+                            api_key: 'deac86272a92449f6c91e3fc36684014',
+                        }
+                    })
+                ]);
+
+                setFilme(filmeRes.data);
+                const providers = providersRes.data.results?.BR?.flatrate || [];
+                setStreamings(providers);
                 setLoading(false);
-            })
-            .catch(() => {
+            } catch {
                 console.log("Filme não foi encontrado");
                 navigate("/", { replace: true });
-            })
+            }
         }
 
         loadFilme();
@@ -86,13 +96,29 @@ const Filme = () => {
                 <button className="btn-primary" onClick={salvarFilme}>
                     + Salvar
                 </button>
-                
-                <a target="_blank"
+
+                <a
+                    target="_blank"
                     rel="external noreferrer"
                     href={`https://youtube.com/results?search_query=${filme.title} Trailer`}
+                    className="btn-secondary"
                 >
                     ▶ Trailer
                 </a>
+
+                {streamings.length > 0 && (
+                    <div className="streamings">
+                        {streamings.map((s) => (
+                            <img
+                                key={s.provider_id}
+                                src={`https://image.tmdb.org/t/p/w45${s.logo_path}`}
+                                alt={s.provider_name}
+                                title={s.provider_name}
+                                className="streaming-logo"
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

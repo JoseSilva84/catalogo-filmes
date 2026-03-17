@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-brand">
           <Link className="logo" to="/">
-            Prime Filme <span className="dot" />
+            Catálogo Prime <span className="dot" />
           </Link>
           <nav className="footer-nav">
             <Link to="/">Início</Link>
