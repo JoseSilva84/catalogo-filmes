@@ -1,6 +1,8 @@
 import './header.css';
 import { Link } from 'react-router-dom';
 
+import Input from './input';
+
 const Header = () => {
   return (
     <header>
@@ -11,6 +13,7 @@ const Header = () => {
         <nav>
           <Link className="favoritos" to="/">Início</Link>
           <Link className="favoritos btn-primary" to="/favoritos">♥ Meus Filmes</Link>
+          <Input></Input>
         </nav>
       </div>
     </header>
