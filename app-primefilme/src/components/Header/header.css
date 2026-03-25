@@ -193,11 +193,12 @@ header {
 /* No menu mobile, o input ocupa mais espaço */
 .mobile-menu .input-header {
   display: flex;
-  width: 90px; 
+  width: 90px;
 }
 
 .mobile-menu .btn-search {
   background-color: black;
+  cursor: pointer;
 }
 
 .input-genre {
