@@ -137,9 +137,10 @@ header {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 50vh;
   padding-top: 120px;
-  background-color: var(--color-bg-dark);
+  /* background-color: var(--color-bg-dark); */
+  background-color: #00000080;
 }
 
 .menu-content.menu-open {
@@ -191,9 +192,13 @@ header {
 
 /* No menu mobile, o input ocupa mais espaço */
 .mobile-menu .input-header {
-  width: 200px; 
+  display: flex;
+  width: 90px; 
 }
 
+.mobile-menu .btn-search {
+  background-color: black;
+}
 
 .input-genre {
   width: 160px;
