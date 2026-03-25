@@ -175,3 +175,15 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   filter: brightness(1.05);
 }
+
+@media (max-width: 768px) {
+  .filme-info h1 {
+    font-size: 24px;
+  }
+
+  .area-button a,
+  .area-button button {
+    width: 100%;
+    justify-content: center;
+  }
+}

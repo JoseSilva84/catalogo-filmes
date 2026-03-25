@@ -39,6 +39,7 @@ header {
   border-bottom: 0.5px solid var(--color-border-dark);
   font-family: var(--font-primary);
   z-index: 1000;
+  position: relative;
 }
 
 .header-inner {
@@ -67,6 +68,7 @@ header {
   cursor: pointer;
   transition: opacity var(--transition-smooth);
   white-space: nowrap;
+  z-index: 1001; /* Garante que o logo fique acima do menu mobile */
 }
 
 .logo:hover {
@@ -82,13 +84,79 @@ header {
 }
 
 /* ========================================
-   NAVEGAÇÃO
+   NAVEGAÇÃO DESKTOP
    ======================================== */
-nav {
+.desktop-menu {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+/* ========================================
+   MENU HAMBÚRGUER (MOBILE)
+   ======================================== */
+.menu-icon {
+  cursor: pointer;
+  z-index: 1001; /* Garante que o ícone fique acima do menu */
+}
+
+.menu-icon .bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--color-text-light);
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+/* Animação do ícone para 'X' */
+.menu-icon.close .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-icon.close .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.close .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* ========================================
+   PAINEL DO MENU MOBILE
+   ======================================== */
+.menu-content {
+  display: none; /* Escondido por padrão */
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 120px;
+  background-color: var(--color-bg-dark);
+}
+
+.menu-content.menu-open {
+  display: flex; /* Visível quando o menu está aberto */
+}
+
+/* ========================================
+   MEDIA QUERY PARA RESPONSIVIDADE
+   ======================================== */
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
 }
 
 /* ========================================
@@ -120,6 +188,12 @@ nav {
   width: 100px;
   text-align: center;
 }
+
+/* No menu mobile, o input ocupa mais espaço */
+.mobile-menu .input-header {
+  width: 200px; 
+}
+
 
 .input-genre {
   width: 160px;
@@ -177,6 +251,14 @@ nav {
   border-color: var(--color-border-hover);
 }
 
+/* No menu mobile, os botões são maiores */
+.mobile-menu .btn-nav {
+  padding: 12px 24px;
+  font-size: 16px;
+  min-width: 200px;
+  text-align: center;
+}
+
 /* Variante com fundo preenchido */
 .btn-nav.btn-primary {
   background: var(--color-text-light);
@@ -186,6 +268,14 @@ nav {
 
 .btn-nav.btn-primary:hover {
   background: var(--color-input-bg-hover);
+}
+
+.btn-close-menu {
+  color: var(--color-text-light);
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 /* ========================================
