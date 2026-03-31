@@ -108,15 +108,35 @@ const Filme = () => {
 
                 {streamings.length > 0 && (
                     <div className="streamings">
-                        {streamings.map((s) => (
-                            <img
-                                key={s.provider_id}
-                                src={`https://image.tmdb.org/t/p/w45${s.logo_path}`}
-                                alt={s.provider_name}
-                                title={s.provider_name}
-                                className="streaming-logo"
-                            />
-                        ))}
+{streamings.map((s) => {
+                            const getPlatformUrl = (id) => {
+                                const urls = {
+                                    8: 'https://www.netflix.com/title/search?query=',
+                                    9: 'https://www.primevideo.com/search/ref=atv_nb_sr?phrase=',
+                                    337: 'https://www.disneyplus.com/pt-br/search?q=',
+                                    1893: 'https://www.max.com/br/pt/search?q=',
+                                    484: 'https://www.claro.com.br/tv',
+                                    2: 'https://tv.apple.com/br/search?term=',
+                                };
+                                return urls[id] || 'https://www.justwatch.com/br/busca?q=';
+                            };
+                            const platformUrl = getPlatformUrl(s.provider_id) + encodeURIComponent(filme.title);
+                            return (
+                                <a
+                                    key={s.provider_id}
+                                    href={platformUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title={`Assistir em ${s.provider_name}`}
+                                >
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/w45${s.logo_path}`}
+                                        alt={s.provider_name}
+                                        className="streaming-logo"
+                                    />
+                                </a>
+                            );
+                        })}
                     </div>
                 )}
             </div>
