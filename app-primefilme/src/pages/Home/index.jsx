@@ -7,7 +7,7 @@ import './home.css';
 const Home = () => {
     const [filmesPadrao, setFilmesPadrao] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { filmes: filmesPesquisa, ano } = useContext(FilmesContext);
+  const { filmes: filmesPesquisa, ano, searchTerm } = useContext(FilmesContext);
     const carrosselRef = useRef(null);
 
     useEffect(() => {
@@ -45,11 +45,13 @@ const Home = () => {
 
     return (
         <div className="home-wrapper">
-            {/* Seção de Resultados da Busca */}
-            {filmesPesquisa.length > 0 && (
-                <div style={{ marginBottom: '40px' }}>
-                    <div className="carrossel-header">
-                        <h2 className="carrossel-titulo">Resultados da Busca - {ano}</h2>
+    {/* Seção de Resultados da Busca */}
+    {filmesPesquisa.length > 0 && (
+      <div style={{ marginBottom: '40px' }}>
+        <div className="carrossel-header">
+          <h2 className="carrossel-titulo">
+            {searchTerm ? `Resultados para "${searchTerm}"` : `Resultados da Busca - ${ano}`}
+          </h2>
                         <div className="carrossel-controles">
                             <button onClick={() => scrollCarrossel('esquerda')} aria-label="Anterior">←</button>
                             <button onClick={() => scrollCarrossel('direita')} aria-label="Próximo">→</button>
