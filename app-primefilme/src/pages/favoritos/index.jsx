@@ -1,16 +1,25 @@
-import { useState, useEffect} from "react";
+import { useState } from "react";
 import './favoritos.css';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 
-const Favoritos = () => {
-    const [filme, setFilmes] = useState([]);
-
-    useEffect(() => {
+// Função segura para obter favoritos do localStorage
+const getFavoritosFromStorage = () => {
+    try {
         const minhaLista = localStorage.getItem("@primefilmes");
-        setFilmes(JSON.parse(minhaLista) || []);
+        if (!minhaLista) return [];
+        const parsed = JSON.parse(minhaLista);
+        // Validação básica: garantir que é um array
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+        // Se houver erro no parse, retorna array vazio
+        console.error('Erro ao parsear lista de favoritos:', e);
+        return [];
+    }
+};
 
-    }, []);
+const Favoritos = () => {
+    const [filme, setFilmes] = useState(getFavoritosFromStorage);
 
     function apagarFilme (id){
         let filtroFilmes =filme.filter((item) => {

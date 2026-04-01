@@ -4,6 +4,8 @@ import { FilmesContext } from '../../context/FilmesContext';
 import './header.css';
 import Input from './input';
 
+const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { setFilmes, searchTerm, setSearchTerm } = useContext(FilmesContext);
@@ -22,7 +24,7 @@ const Header = () => {
       try {
         setIsSearching(true);
         const response = await fetch(
-          `https://api.themoviedb.org/3/search/movie?api_key=deac86272a92449f6c91e3fc36684014&language=pt-BR&query=${encodeURIComponent(term)}&page=1`
+          `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=pt-BR&query=${encodeURIComponent(term)}&page=1`
         );
         const data = await response.json();
         setFilmes(data.results || []);

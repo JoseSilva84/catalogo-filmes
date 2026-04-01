@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import './filme.css';
 
+const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
 const Filme = () => {
     const { id } = useParams();
     const [filme, setFilme] = useState({});
@@ -18,13 +20,13 @@ const Filme = () => {
                 const [filmeRes, providersRes] = await Promise.all([
                     api.get(`/movie/${id}`, {
                         params: {
-                            api_key: 'deac86272a92449f6c91e3fc36684014',
+                            api_key: TMDB_API_KEY,
                             language: 'pt-BR',
                         }
                     }),
                     api.get(`/movie/${id}/watch/providers`, {
                         params: {
-                            api_key: 'deac86272a92449f6c91e3fc36684014',
+                            api_key: TMDB_API_KEY,
                         }
                     })
                 ]);
@@ -99,8 +101,8 @@ const Filme = () => {
 
                 <a
                     target="_blank"
-                    rel="external noreferrer"
-                    href={`https://youtube.com/results?search_query=${filme.title} Trailer`}
+                    rel="noopener noreferrer"
+                    href={`https://youtube.com/results?search_query=${encodeURIComponent(filme.title)} Trailer`}
                     className="btn-secondary"
                 >
                     ▶ Trailer

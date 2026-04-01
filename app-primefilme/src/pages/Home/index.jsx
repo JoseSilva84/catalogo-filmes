@@ -4,6 +4,8 @@ import { FilmesContext } from '../../context/FilmesContext';
 import api from '../../services/api';
 import './home.css';
 
+const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
 const Home = () => {
     const [filmesPadrao, setFilmesPadrao] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -14,7 +16,7 @@ const Home = () => {
         async function loadFilmes() {
             const response = await api.get("movie/now_playing", {
                 params: {
-                    api_key: 'deac86272a92449f6c91e3fc36684014',
+                    api_key: TMDB_API_KEY,
                     language: 'pt-BR',
                     page: 1
                 }
