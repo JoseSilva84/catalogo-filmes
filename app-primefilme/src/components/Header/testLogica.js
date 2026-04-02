@@ -17,3 +17,5 @@ if (clickBotao){
             break;
     }
 };
+
+//perfeito
