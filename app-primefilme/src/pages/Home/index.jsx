@@ -55,7 +55,8 @@ const Home = () => {
         setAiMovies([]);
         
         try {
-            const response = await fetch('http://localhost:3001/api/recommend', {
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://catalogo-filmes-s4yc.onrender.com';
+            const response = await fetch(`${backendUrl}/api/recommend`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ prompt: aiPrompt })
@@ -92,7 +93,7 @@ const Home = () => {
             }
         } catch (err) {
             console.error("Erro na busca por IA:", err);
-            toast.error(err.message === 'Failed to fetch' ? "Servidor local (backend) não está rodando na porta 3001." : `Falha: ${err.message}`);
+            toast.error(err.message === 'Failed to fetch' ? "Servidor backend inacessível no momento." : `Falha: ${err.message}`);
         } finally {
             setLoadingAI(false);
         }
